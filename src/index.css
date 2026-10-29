@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --brand-primary: #121212;
+    --brand-accent: #FF7900;
+    --brand-accent-hover: #E85D04;
+    --brand-accent-light: #FFF3E8;
+    --brand-accent-glow: rgba(255, 121, 0, 0.15);
+    --brand-canvas: #F8FAFC;
+    --brand-card: #FFFFFF;
+    --brand-border: #E2E8F0;
+    --brand-text: #0F172A;
+    --brand-text-muted: #64748B;
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+
+  .dark {
+    --brand-primary: #F8FAFC;
+    --brand-accent: #FF7900;
+    --brand-accent-hover: #FFA74D;
+    --brand-accent-light: #2A1705;
+    --brand-accent-glow: rgba(255, 121, 0, 0.25);
+    --brand-canvas: #0B0F19;
+    --brand-card: #151C28;
+    --brand-border: rgba(255, 255, 255, 0.08);
+    --brand-text: #F8FAFC;
+    --brand-text-muted: #94A3B8;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--brand-canvas);
+    color: var(--brand-text);
+  }
+}
+
+/* Tabular numbers for all financial, bid and metric displays */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Smooth mobile-optimized scroll */
+html {
+  -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
+  touch-action: manipulation;
+}
+
+/* Hide scrollbars globally to eliminate desktop-style sliding bars on mobile */
+*::-webkit-scrollbar,
+::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+*,
+html,
+body,
+div,
+nav,
+main {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+/* Safe area insets */
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.mb-safe {
+  margin-bottom: env(safe-area-inset-bottom, 0px);
+}

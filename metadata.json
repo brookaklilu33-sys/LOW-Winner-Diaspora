@@ -1,0 +1,6 @@
+{
+  "name": "Lowwin Diaspora — Residential Property Competitions",
+  "description": "Mobile-first platform for the Ethiopian diaspora to enter transparent lowest-unique-bid competitions for verified residential properties in Ethiopia.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

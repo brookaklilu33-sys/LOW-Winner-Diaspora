@@ -1,0 +1,159 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Registered participant or administrator user profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "format": "email", "maxLength": 256 },
+        "displayName": { "type": "string", "maxLength": 128 },
+        "phoneNumber": { "type": "string", "maxLength": 64 },
+        "phone": { "type": "string", "maxLength": 64 },
+        "backupEmail": { "type": "string", "format": "email", "maxLength": 256 },
+        "role": { "type": "string", "enum": ["PARTICIPANT", "ADMIN", "SUPERADMIN", "PROPERTY_REVIEWER"] },
+        "isSuspended": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "lastLoginAt": { "type": "string" }
+      },
+      "required": ["id", "email", "displayName", "role"]
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "Authorized administrator mapping document for RBAC security rule lookup",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "format": "email", "maxLength": 256 },
+        "role": { "type": "string", "enum": ["ADMIN", "SUPERADMIN", "PROPERTY_REVIEWER"] },
+        "assignedAt": { "type": "string" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Competition": {
+      "title": "Competition",
+      "description": "Real estate lowest-unique-bid competition record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "slug": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 256 },
+        "status": { "type": "string", "enum": ["DRAFT", "SCHEDULED", "OPEN", "LIVE", "CLOSED", "COMPLETED", "CANCELLED"] },
+        "startTime": { "type": "string" },
+        "endTime": { "type": "string" },
+        "totalTicketsSold": { "type": "number" },
+        "totalParticipants": { "type": "number" },
+        "totalBidsSubmitted": { "type": "number" },
+        "winningNumber": { "type": "number" },
+        "winnerId": { "type": "string", "maxLength": 128 },
+        "winnerName": { "type": "string", "maxLength": 128 }
+      },
+      "required": ["id", "title", "status", "startTime", "endTime"]
+    },
+    "Entry": {
+      "title": "Entry",
+      "description": "Purchased ticket entry for a competition",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "competitionId": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "userName": { "type": "string", "maxLength": 128 },
+        "ticketPriceUSD": { "type": "number" },
+        "ticketPriceCents": { "type": "number" },
+        "status": { "type": "string", "enum": ["ACTIVE", "REFUNDED", "VOID"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "competitionId", "userId", "status", "createdAt"]
+    },
+    "Bid": {
+      "title": "Bid",
+      "description": "Secret number chosen for a competition entry",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "competitionId": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "number": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "competitionId", "userId", "number", "createdAt"]
+    },
+    "Wallet": {
+      "title": "Wallet",
+      "description": "User ledger wallet balance and stats",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "balanceCents": { "type": "number" },
+        "currency": { "type": "string", "maxLength": 8 },
+        "totalDepositedCents": { "type": "number" },
+        "totalSpentCents": { "type": "number" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "balanceCents", "currency"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Double-entry ledger transaction journal record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "type": { "type": "string", "enum": ["DEPOSIT", "ENTRY_FEE", "REFUND", "WITHDRAWAL", "PRIZE_AWARD"] },
+        "amountCents": { "type": "number" },
+        "status": { "type": "string", "enum": ["COMPLETED", "PENDING", "FAILED"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "type", "amountCents", "status", "createdAt"]
+    },
+    "Withdrawal": {
+      "title": "Withdrawal",
+      "description": "User wallet withdrawal request",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "amountCents": { "type": "number" },
+        "status": { "type": "string", "enum": ["PENDING", "APPROVED", "REJECTED", "PAID"] },
+        "destination": { "type": "string", "maxLength": 256 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "amountCents", "status", "destination", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "User" },
+      "description": "User accounts and diaspora participant profiles"
+    },
+    "/admins/{adminId}": {
+      "schema": { "$ref": "Admin" },
+      "description": "Authorized administrators list for security rule checking"
+    },
+    "/competitions/{competitionId}": {
+      "schema": { "$ref": "Competition" },
+      "description": "Real estate competition listings"
+    },
+    "/entries/{entryId}": {
+      "schema": { "$ref": "Entry" },
+      "description": "Competition ticket entries"
+    },
+    "/bids/{bidId}": {
+      "schema": { "$ref": "Bid" },
+      "description": "Secret number choices submitted by users"
+    },
+    "/wallets/{userId}": {
+      "schema": { "$ref": "Wallet" },
+      "description": "User ledger wallets"
+    },
+    "/transactions/{transactionId}": {
+      "schema": { "$ref": "Transaction" },
+      "description": "Financial ledger transactions"
+    },
+    "/withdrawals/{withdrawalId}": {
+      "schema": { "$ref": "Withdrawal" },
+      "description": "Participant withdrawal requests"
+    }
+  }
+}
