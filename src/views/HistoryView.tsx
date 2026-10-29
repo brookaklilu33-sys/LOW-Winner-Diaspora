@@ -134,8 +134,10 @@ export const HistoryView: React.FC = () => {
                   {/* Property Photo */}
                   <div className="w-full sm:w-40 h-28 rounded-xl overflow-hidden bg-slate-900 shrink-0 relative">
                     <img
-                      src={auc.property?.images?.[0] || auc.property?.image || '/src/assets/images/addis_bole_luxury_apartment_1792574992395.jpg'}
+                      src={auc.property?.images?.[0] || auc.property?.image || '/images/addis_bole_luxury_apartment_1792574992395.jpg'}
                       alt={auc.title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute top-2 left-2 bg-emerald-500/85 backdrop-blur-md text-white text-[8.5px] uppercase tracking-wider font-extrabold px-2 py-0.5 rounded-full border border-white/25 shadow-xs">

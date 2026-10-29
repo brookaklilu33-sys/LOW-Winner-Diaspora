@@ -157,8 +157,8 @@ export const AdminView: React.FC = () => {
       city: 'Addis Ababa',
       subCityArea: 'Bole / Kirkos',
       valuationUSD: newRetailValue || 250000,
-      image: '/src/assets/images/addis_bole_luxury_apartment_1792574992395.jpg',
-      images: ['/src/assets/images/addis_bole_luxury_apartment_1792574992395.jpg'],
+      image: '/images/addis_bole_luxury_apartment_1792574992395.jpg',
+      images: ['/images/addis_bole_luxury_apartment_1792574992395.jpg'],
       description: 'Newly listed residential property in Addis Ababa with certified municipal title deed.',
       keyFeatures: ['Registered clean title deed', '24/7 power backup & water reservoir', 'Direct conveyance warranty'],
       documents: []

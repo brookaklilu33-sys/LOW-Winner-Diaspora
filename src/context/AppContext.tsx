@@ -10,6 +10,7 @@ import { SupportedLanguage, translations, LANGUAGE_OPTIONS } from '../services/i
 import { db, auth } from '../services/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { ImagePreloader } from '../utils/imagePreloader';
 
 interface AppContextType {
   currentUser: User;
@@ -321,6 +322,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     AuctionManagerService.updatePropertyDetails(compId, updates);
     setCompetitions(AuctionManagerService.getAllCompetitions());
   };
+
+  // Preload auction thumbnails for fast perceived mobile loading
+  useEffect(() => {
+    if (competitions.length > 0) {
+      ImagePreloader.preloadAuctionThumbnails(competitions);
+    }
+  }, [competitions]);
 
   // Sync dark mode
   useEffect(() => {

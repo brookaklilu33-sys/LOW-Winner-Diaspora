@@ -52,8 +52,8 @@ export class AuctionManagerService {
           ownershipVerificationStatus: 'VERIFIED',
           verificationDate: '2026-08-15',
           images: [
-            '/src/assets/images/addis_bole_luxury_apartment_1792574992395.jpg',
-            '/src/assets/images/addis_kazanchis_penthouse_1792574993870.jpg'
+            '/images/addis_bole_luxury_apartment_1792574992395.jpg',
+            '/images/addis_kazanchis_penthouse_1792574993870.jpg'
           ],
           documents: [
             {
@@ -126,8 +126,8 @@ export class AuctionManagerService {
           ownershipVerificationStatus: 'VERIFIED',
           verificationDate: '2026-09-02',
           images: [
-            '/src/assets/images/addis_kazanchis_penthouse_1792574993870.jpg',
-            '/src/assets/images/addis_bole_luxury_apartment_1792574992395.jpg'
+            '/images/addis_kazanchis_penthouse_1792574993870.jpg',
+            '/images/addis_bole_luxury_apartment_1792574992395.jpg'
           ],
           documents: [
             {
@@ -188,7 +188,7 @@ export class AuctionManagerService {
           ownershipVerificationStatus: 'VERIFIED',
           verificationDate: '2026-07-20',
           images: [
-            '/src/assets/images/addis_cmc_villa_residence_1792574993455.jpg'
+            '/images/addis_cmc_villa_residence_1792574993455.jpg'
           ],
           documents: [
             {
@@ -250,7 +250,7 @@ export class AuctionManagerService {
           ownershipVerificationStatus: 'VERIFIED',
           verificationDate: '2026-08-10',
           images: [
-            '/src/assets/images/addis_sarbet_modern_condo_1792574993989.jpg'
+            '/images/addis_sarbet_modern_condo_1792574993989.jpg'
           ],
           documents: [
             {
@@ -336,7 +336,7 @@ export class AuctionManagerService {
           ownershipVerificationStatus: 'VERIFIED',
           verificationDate: '2026-07-20',
           images: [
-            '/src/assets/images/addis_bole_luxury_apartment_1792574992395.jpg'
+            '/images/addis_bole_luxury_apartment_1792574992395.jpg'
           ],
           documents: [
             {
@@ -417,7 +417,7 @@ export class AuctionManagerService {
           ownershipVerificationStatus: 'VERIFIED',
           verificationDate: '2026-06-15',
           images: [
-            '/src/assets/images/addis_cmc_villa_residence_1792574993455.jpg'
+            '/images/addis_cmc_villa_residence_1792574993455.jpg'
           ],
           documents: [
             {

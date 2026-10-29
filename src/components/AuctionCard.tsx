@@ -3,6 +3,7 @@ import { Competition } from '../types/auction';
 import { useApp } from '../context/AppContext';
 import { Clock, ArrowRight, Building, Calendar, Video, Maximize2 } from 'lucide-react';
 import { ImageLightboxModal } from './ImageLightboxModal';
+import { ImagePreloader } from '../utils/imagePreloader';
 
 interface CompetitionCardProps {
   competition?: Competition;
@@ -54,13 +55,22 @@ export const AuctionCard: React.FC<CompetitionCardProps> = ({ competition, aucti
 
   const primaryImage = comp.property.images?.[0];
 
+  const handleWarmUp = () => {
+    if (comp.property.images && comp.property.images.length > 0) {
+      ImagePreloader.warmGallery(comp.property.images);
+    }
+  };
+
   const handleCardClick = () => {
+    handleWarmUp();
     navigateTo(`/property/${comp.slug || comp.id}`);
   };
 
   return (
     <article
       onClick={handleCardClick}
+      onMouseEnter={handleWarmUp}
+      onTouchStart={handleWarmUp}
       className="bg-white/75 dark:bg-[#151C28]/75 backdrop-blur-xl rounded-2xl border border-white/60 dark:border-white/10 overflow-hidden flex flex-col hover:border-[#FF7900]/50 hover:shadow-[0_12px_36px_rgba(255,121,0,0.12)] shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all duration-300 group active:scale-[0.99] cursor-pointer select-none"
     >
       {/* Property Image Section with compact Status Badge */}
@@ -69,7 +79,8 @@ export const AuctionCard: React.FC<CompetitionCardProps> = ({ competition, aucti
           <img
             src={primaryImage}
             alt={comp.property.title}
-            loading="lazy"
+            loading="eager"
+            decoding="async"
             referrerPolicy="no-referrer"
             onError={() => setImageLoaded(false)}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

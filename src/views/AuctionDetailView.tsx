@@ -66,7 +66,7 @@ export const AuctionDetailView: React.FC<AuctionDetailViewProps> = ({ idOrSlug }
       ? prop.images
       : prop.image
       ? [prop.image]
-      : ['/src/assets/images/addis_bole_luxury_apartment_1792574992395.jpg'];
+      : ['/images/addis_bole_luxury_apartment_1792574992395.jpg'];
   const propDocs = prop.documents || [];
   const valuation = prop.valuationUSD ?? prop.retailValueUSD ?? 0;
   const config = competition.entryConfig;
